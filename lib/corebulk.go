@@ -17,7 +17,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"strconv"
 	"sync"
 	"sync/atomic"
 	"time"
@@ -362,6 +361,7 @@ func WriteBulkBytes(op string, index string, _type string, id, parent, ttl strin
 	buf := bytes.Buffer{}
 	buf.WriteString(fmt.Sprintf(`{"%s":{"_index":"`, op))
 	buf.WriteString(index)
+	//高版本不支持_type字段
 	//buf.WriteString(`","_type":"`)
 	//buf.WriteString(_type)
 	buf.WriteString(`"`)
@@ -387,9 +387,10 @@ func WriteBulkBytes(op string, index string, _type string, id, parent, ttl strin
 		buf.WriteString(`"`)
 	}
 	if date != nil {
-		buf.WriteString(`,"_timestamp":"`)
-		buf.WriteString(strconv.FormatInt(date.UnixNano()/1e6, 10))
-		buf.WriteString(`"`)
+		//高版本不支持_timestamp字段
+		//buf.WriteString(`,"_timestamp":"`)
+		//buf.WriteString(strconv.FormatInt(date.UnixNano()/1e6, 10))
+		//buf.WriteString(`"`)
 	}
 
 	buf.WriteString(`}}`)
