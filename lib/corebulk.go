@@ -362,8 +362,8 @@ func WriteBulkBytes(op string, index string, _type string, id, parent, ttl strin
 	buf := bytes.Buffer{}
 	buf.WriteString(fmt.Sprintf(`{"%s":{"_index":"`, op))
 	buf.WriteString(index)
-	buf.WriteString(`","_type":"`)
-	buf.WriteString(_type)
+	//buf.WriteString(`","_type":"`)
+	//buf.WriteString(_type)
 	buf.WriteString(`"`)
 	if len(id) > 0 {
 		buf.WriteString(`,"_id":"`)

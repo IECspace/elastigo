@@ -71,6 +71,11 @@ func (r *Request) SetBodyGzip(data interface{}) error {
 	return nil
 }
 
+func (r *Request) SetBodyIOReaderJson(body io.Reader) {
+	r.SetBody(body)
+	r.Header.Set("Content-Type", "application/json")
+}
+
 func (r *Request) SetBodyJson(data interface{}) error {
 	body, err := json.Marshal(data)
 	if err != nil {

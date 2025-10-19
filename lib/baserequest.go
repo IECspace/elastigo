@@ -43,7 +43,7 @@ func (c *Conn) DoCommand(method string, url string, args map[string]interface{},
 			case string:
 				req.SetBodyString(v)
 			case io.Reader:
-				req.SetBody(v)
+				req.SetBodyIOReaderJson(v)
 			case []byte:
 				req.SetBodyBytes(v)
 			default:
